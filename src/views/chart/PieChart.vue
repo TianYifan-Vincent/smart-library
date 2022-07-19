@@ -4,6 +4,7 @@
 
 <script>
 import * as echarts from 'echarts';
+// import 'echarts/theme/macarons.js'
 // require('echarts/theme/macarons') // echarts theme
 import resize from '../mixins/resize'
 
@@ -53,7 +54,7 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: ['爱情', '动作', 'Forex', 'Gold', 'Forecasts']
         },
         series: [
           {
@@ -63,8 +64,8 @@ export default {
             radius: [15, 95],
             center: ['50%', '38%'],
             data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
+              { value: 320, name: '爱情' },
+              { value: 240, name: '动作' },
               { value: 149, name: 'Forex' },
               { value: 100, name: 'Gold' },
               { value: 59, name: 'Forecasts' }

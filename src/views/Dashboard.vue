@@ -2,7 +2,7 @@
     <div>
         <el-row :gutter="20">
             <el-col :span="8">
-                <el-card shadow="hover" class="mgb20" style="height:320px;">
+                <el-card shadow="hover" class="mgb20" style="height:330px;">
                     <div class="user-info">
                         <img src="../assets/img/admin.png" class="user-avator" alt />
                         <div class="user-info-cont">
@@ -29,7 +29,7 @@
                 <el-card shadow="hover" style="height:252px;">
                     <template #header>
                         <div class="clearfix">
-                            <span>语言详情</span>
+                            <span>书籍分类详情</span>
                         </div>
                     </template>
                     Vue
@@ -79,17 +79,16 @@
                     <template #header>
                         <div class="clearfix">
                             <span>审批待办事项</span>
-                            <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
                         </div>
                     </template>
 
                     <el-table :show-header="false" :data="todoList" style="width:100%;">
-                        <el-table-column width="40">
-                            <template #default="scope">
-                                <el-checkbox v-model="scope.row.status"></el-checkbox>
-                            </template>
-                        </el-table-column>
-                        <el-table-column>
+<!--                        <el-table-column width="40">-->
+<!--                            <template #default="scope">-->
+<!--                                <el-checkbox v-model="scope.row.status"></el-checkbox>-->
+<!--                            </template>-->
+<!--                        </el-table-column>-->
+                        <el-table-column width="600">
                             <template #default="scope">
                                 <div class="todo-item" :class="{
                                         'todo-item-del': scope.row.status,
@@ -97,9 +96,8 @@
                             </template>
                         </el-table-column>
                         <el-table-column width="60">
-                            <template>
-                                <i class="el-icon-edit"></i>
-                                <i class="el-icon-delete"></i>
+                            <template #default="scope">
+                                <el-button icon="el-icon-edit" type="text">处理</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -108,9 +106,8 @@
                           @size-change="handleSizeChange"
                           @current-change="handleCurrentChange"
                           :current-page="currentPage"
-                          :page-sizes="[5, 10, 20]"
+                          :page-sizes="[5,10,15]"
                           :page-size="pageSize"
-                          :pager-count="10"
                           layout="total, sizes, prev, pager, next, jumper"
                           :total="total"
                       >
@@ -131,17 +128,17 @@
             </el-col>
         </el-row>
       <el-row :gutter="32">
-        <el-col :xs="24" :sm="24" :lg="8">
-          <div class="chart-wrapper">
-            <raddar-chart />
-          </div>
-        </el-col>
-        <el-col :xs="24" :sm="24" :lg="8">
+<!--        <el-col :xs="24" :sm="24" :lg="8">-->
+<!--          <div class="chart-wrapper">-->
+<!--            <raddar-chart />-->
+<!--          </div>-->
+<!--        </el-col>-->
+        <el-col :xs="24" :sm="24" :lg="12">
           <div class="chart-wrapper">
             <pie-chart />
           </div>
         </el-col>
-        <el-col :xs="24" :sm="24" :lg="8">
+        <el-col :xs="24" :sm="24" :lg="12">
           <div class="chart-wrapper">
             <bar-chart />
           </div>
@@ -207,7 +204,7 @@ export default {
         const options = {
             type: "bar",
             title: {
-                text: "最近一周各品类销售图",
+                text: "最近一周图书借阅情况",
             },
             xRorate: 25,
             labels: ["周一", "周二", "周三", "周四", "周五"],
@@ -229,7 +226,7 @@ export default {
         const options2 = {
             type: "line",
             title: {
-                text: "最近几个月各品类销售趋势图",
+                text: "最近几个月各类书籍借阅趋势图",
             },
             labels: ["6月", "7月", "8月", "9月", "10月"],
             datasets: [
@@ -249,27 +246,23 @@ export default {
         };
         const todoList = reactive([
             {
-                title: "今天要修复100个bug",
+                title: "user1借阅《1》逾期未还",
                 status: false,
             },
             {
-                title: "今天要修复100个bug",
+                title: "user2借阅《2》审批中",
                 status: false,
             },
             {
-                title: "今天要写100行代码加几个bug吧",
+                title: "user3还书《3》审批中",
                 status: false,
             },
             {
-                title: "今天要修复100个bug",
+                title: "user4借阅《4》逾期未还",
                 status: false,
             },
             {
-                title: "今天要修复100个bug",
-                status: true,
-            },
-            {
-                title: "今天要写100行代码加几个bug吧",
+                title: "user5借阅《5》逾期未还",
                 status: true,
             },
         ]);
@@ -291,7 +284,7 @@ export default {
   data(){
       return{
         currentPage: 1,
-        pageSize:10,
+        pageSize:5,
         total: 10,
       }
   },

@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar">
-        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157"
-            text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
+        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse"  background-color="#324157"
+            text-color="#bfcbd9" active-text-color="#20a0ff" router>
             <template v-for="item in items">
                 <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
@@ -44,74 +44,49 @@ export default {
                 title: "系统首页",
             },
             {
-                icon: "el-icon-lx-cascades",
+                icon: "el-icon-user-solid",
                 index: "/table",
                 title: "用户管理",
             },
+          {
+            icon: "el-icon-reading",
+            index: "2",
+            title: "管理员图书模块",
+            subs: [
+              {
+                index: "/form",
+                title: "图书管理",
+              },
+              {
+                index: "/upload",
+                title: "图书类型管理",
+              },
+            ],
+          },
             {
-                icon: "el-icon-lx-copy",
-                index: "/tabs",
-                title: "管理员图书模块",
-            },
-            {
-                icon: "el-icon-lx-calendar",
+                icon: "el-icon-tickets",
                 index: "3",
                 title: "管理员借阅模块",
                 subs: [
-                    {
-                        index: "/form",
-                        title: "基本表单",
-                    },
-                    {
-                        index: "/upload",
-                        title: "文件上传",
-                    },
-                    {
-                        index: "4",
-                        title: "三级菜单",
-                        subs: [
-                            {
-                                index: "/editor",
-                                title: "富文本编辑器",
-                            },
-                        ],
-                    },
+                  {
+                    index: "/tabs",
+                    title: "借阅信息管理",
+                  },
+                  {
+                    index: "/examine",
+                    title: "审批管理",
+                  },
                 ],
             },
-            {
-                icon: "el-icon-lx-emoji",
-                index: "/icon",
-                title: "自定义图标",
-            },
+            // {
+            //     icon: "el-icon-lx-emoji",
+            //     index: "/icon",
+            //     title: "自定义图标",
+            // },
             {
                 icon: "el-icon-pie-chart",
                 index: "/charts",
-                title: "schart图表",
-            },
-            {
-                icon: "el-icon-lx-global",
-                index: "/i18n",
-                title: "国际化功能",
-            },
-            {
-                icon: "el-icon-lx-warn",
-                index: "7",
-                title: "错误处理",
-                subs: [
-                    {
-                        index: "/permission",
-                        title: "权限测试",
-                    },
-                    {
-                        index: "/404",
-                        title: "404页面",
-                    },
-                ],
-            },
-            {
-                icon: "el-icon-lx-redpacket_fill",
-                index: "/donate",
-                title: "支持作者",
+                title: "统计图表",
             },
         ];
 
@@ -123,11 +98,12 @@ export default {
 
         const store = useStore();
         const collapse = computed(() => store.state.collapse);
-
+        const openeds= ['1'];
         return {
             items,
             onRoutes,
             collapse,
+            openeds
         };
     },
 };

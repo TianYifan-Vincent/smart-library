@@ -11,7 +11,7 @@
                 <!-- 消息中心 -->
                 <div class="btn-bell">
                     <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
-                        <router-link to="/tabs">
+                        <router-link to="/examine">
                             <i class="el-icon-bell"></i>
                         </router-link>
                     </el-tooltip>
@@ -68,8 +68,9 @@ export default {
         const handleCommand = (command) => {
             if (command == "loginout") {
                 localStorage.removeItem("currentTime");
-                store.commit("getlastlogintime")
                 localStorage.removeItem("ms_username");
+                localStorage.removeItem("ms_userid");
+                localStorage.removeItem("role");
                 router.push("/login");
             } else if (command == "user") {
                 router.push("/user");
