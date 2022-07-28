@@ -5,12 +5,37 @@ export default createStore({
     state: {
         tagsList: [],
         collapse: false,
-        lastlogintime:{
+        lastlogintime: {
             date: '',
             time: '',
+        },
+        token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
+        user: {
+            age: null,
+            email: "",
+            gender: "",
+            phone: ""
         }
     },
     mutations: {
+        setToken(state, token) {
+
+            state.token = token;
+
+            localStorage.setItem("token", token);
+
+        },
+
+        delToken(state) {
+
+            state.token = '';
+
+            localStorage.removeItem("token");
+
+        },
+        getuserInfo(state, data) {
+            state.user = data;
+        },
         delTagsItem(state, data) {
             state
                 .tagsList

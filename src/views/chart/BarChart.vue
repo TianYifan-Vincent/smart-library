@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" ref="main"/>
 </template>
 
 <script>
@@ -7,11 +7,11 @@ import * as echarts from 'echarts';
 // import 'echarts/theme/macarons.js'
 // require('echarts/theme/macarons') // echarts theme
 import resize from '../mixins/resize'
-
-const animationDuration = 6000
-
+import request from "../../utils/request";
+import {reactive, ref, toRaw} from "vue";
+import {useStore} from "vuex";
 export default {
-  // name:"BarChart",
+  name:"PieChart",
   mixins: [resize],
   props: {
     className: {
@@ -27,15 +27,28 @@ export default {
       default: '300px'
     }
   },
+  setup() {
+    const store = useStore();
+    return{
+      store
+    }
+  },
+  computed: {
+  },
+  created() {
+    this.getdata()
+  },
   data() {
     return {
-      chart: null
+      analyzeNewReader:[],
+      category:[],
+      bookdata:[],
+      chart: null,
+      option:null,
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.initChart()
-    })
+
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -45,66 +58,103 @@ export default {
     this.chart = null
   },
   methods: {
+    getdata(){
+      request.get("/admin/statistics/Count").then(res => {
+        if (res.code === 455) {
+          this.analyzeNewReader=res.data.analyzeNewReader
+          for(let i of this.analyzeNewReader) {
+            this.category.push(i.name)
+            this.bookdata.push(i.cnt)
+          }
+          this.$nextTick(() => {
+            this.initChart()
+          })
+        }
+      })
+    },
     initChart() {
-      this.chart = echarts.init(this.$el, 'macarons')
-
-      this.chart.setOption({
+      this.chart = echarts.init(this.$refs.main)
+      this.option = {
+        title: {
+          text: '用户一周新增数量',
+          textStyle:{
+            color:'#666666',
+            textVerticalAlign: "auto"
+          }
+        },
         tooltip: {
-          show: true,
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "shadow",   //提示框类型
-            label: {       //坐标轴指示器的文本标签
-              show: true
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
             }
           }
         },
-        title: {
-          text: 'Snow蛋糕店-本周各类蛋糕销量',   //主标题
-          textAlign: 'left',    //居左
-          textStyle: {         //样式
-            fontSize: 20
+        toolbox: {
+          feature: {
+            // dataView: { show: true, readOnly: false },
+            // magicType: { show: true, type: ['line', 'bar'] },
+            // restore: { show: true },
+            // saveAsImage: { show: true }
           }
         },
-        grid: {
-          top: '15%',
-          left: '2%',
-          right: '2%',
-          bottom: '3%',
-          containLabel: true
+        legend: {
+          show:false,
+          data: ['Evaporation', 'Precipitation', 'Temperature']
         },
-        xAxis: [{
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-          axisTick: {
-            alignWithLabel: true
+        xAxis: [
+          {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            axisPointer: {
+              type: 'shadow'
+            }
           }
-        }],
-        yAxis: [{
-          type: 'value',
-          axisTick: {
-            show: false
-          }
-        }],
-        series: [{
-          name: '男性',
-          nameTextStyle: {
-            color: "rgb(117,217,204)"    //x轴上方单位的颜色
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            // name: '新增数',
+            min: 0,
+            max: 250,
+            interval: 50,
+            // axisLabel: {
+            //   formatter: '{value} ml'
+            // }
           },
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [79, 21, 200, 334, 390, 330, 220],
-          animationDuration
-        }, {
-          name: '女性',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [80, 52, 200, 334, 390, 330, 220],
-          animationDuration
-        },]
-      })
+          {
+            type: 'value',
+            // name: '新增数',
+            min: 0,
+            max: 250,
+            interval: 50,
+            // axisLabel: {
+            //   formatter: '{value} ml'
+            // }
+          },
+        ],
+        series: [
+          {
+            name: '新增量',
+            color:'#4a90e2',
+            type: 'bar',
+            data: [
+              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
+            ]
+          },
+          {
+            name: '新增量',
+            color:'#ee6666',
+            type: 'line',
+            yAxisIndex: 1,
+            data: [
+              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
+            ]
+          }
+        ]
+      };
+      this.chart.setOption(this.option);
     }
   }
 }

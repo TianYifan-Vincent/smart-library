@@ -1,16 +1,18 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div :class="className" :style="{height:height,width:width}" ref="main"/>
 </template>
 
 <script>
 import * as echarts from 'echarts';
+// import 'echarts/theme/macarons.js'
 // require('echarts/theme/macarons') // echarts theme
 import resize from '../mixins/resize'
-
-const animationDuration = 3000
+import request from "../../utils/request";
+import {reactive, ref, toRaw} from "vue";
+import {useStore} from "vuex";
 
 export default {
-  // name:"RaddarChart",
+  name:"PieChart",
   mixins: [resize],
   props: {
     className: {
@@ -26,15 +28,28 @@ export default {
       default: '300px'
     }
   },
+  setup() {
+    const store = useStore();
+    return{
+      store
+    }
+  },
+  computed: {
+  },
+  created() {
+    this.getdata()
+  },
   data() {
     return {
-      chart: null
+      weekday:[],
+      count:[],
+      bookdata:[],
+      chart: null,
+      option:null,
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.initChart()
-    })
+
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -44,73 +59,80 @@ export default {
     this.chart = null
   },
   methods: {
+    getdata(){
+      request.get("/admin/statistics/Count").then(res => {
+        if (res.code === 455) {
+          this.weekday=res.data.lastWeek.weekday
+          this.count=res.data.lastWeek.count
+          // console.log(Math.max.apply(null,this.count))//求数组最大值
+          this.$nextTick(() => {
+            this.initChart()
+          })
+        }
+      })
+    },
     initChart() {
-      this.chart = echarts.init(this.$el, 'macarons')
-
-      this.chart.setOption({
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+      this.chart = echarts.init(this.$refs.main)
+      this.option = {
+        title: {
+          text: '最近一周图书借阅情况',
+          textStyle:{
+            color:'#666666',
+            textVerticalAlign: "auto"
           }
         },
-        radar: {
-          radius: '66%',
-          center: ['50%', '42%'],
-          splitNumber: 8,
-          splitArea: {
-            areaStyle: {
-              color: 'rgba(127,95,132,.3)',
-              opacity: 1,
-              shadowBlur: 45,
-              shadowColor: 'rgba(0,0,0,.5)',
-              shadowOffsetX: 0,
-              shadowOffsetY: 15
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
             }
-          },
-          indicator: [
-            { name: 'Sales', max: 10000 },
-            { name: 'Administration', max: 20000 },
-            { name: 'Information Technology', max: 20000 },
-            { name: 'Customer Support', max: 20000 },
-            { name: 'Development', max: 20000 },
-            { name: 'Marketing', max: 20000 }
-          ]
+          }
+        },
+        toolbox: {
+          feature: {
+            // dataView: { show: true, readOnly: false },
+            // magicType: { show: true, type: ['line', 'bar'] },
+            // restore: { show: true },
+            // saveAsImage: { show: true }
+          }
         },
         legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['Allocated Budget', 'Expected Spending', 'Actual Spending']
+          show:false,
+          data: ['Evaporation', 'Precipitation', 'Temperature']
         },
-        series: [{
-          type: 'radar',
-          symbolSize: 0,
-          areaStyle: {
-            normal: {
-              shadowBlur: 13,
-              shadowColor: 'rgba(0,0,0,.2)',
-              shadowOffsetX: 0,
-              shadowOffsetY: 10,
-              opacity: 1
+        xAxis: [
+          {
+            type: 'category',
+            data: this.weekday,
+            axisPointer: {
+              type: 'shadow'
             }
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            // name: '新增数',
+            min: 0,
+            max: Math.ceil(Math.max.apply(null,this.count)*1.5/100)*100,
+            interval: Math.ceil(Math.max.apply(null,this.count)*1.5/100)*100/5,
+            // axisLabel: {
+            //   formatter: '{value} ml'
+            // }
           },
-          data: [
-            {
-              value: [5000, 7000, 12000, 11000, 15000, 14000],
-              name: 'Allocated Budget'
-            },
-            {
-              value: [4000, 9000, 15000, 15000, 13000, 11000],
-              name: 'Expected Spending'
-            },
-            {
-              value: [5500, 11000, 12000, 15000, 12000, 12000],
-              name: 'Actual Spending'
-            }
-          ],
-          animationDuration: animationDuration
-        }]
-      })
+        ],
+        series: [
+          {
+            name: '新增量',
+            color:'#fc8452',
+            type: 'bar',
+            data: this.count
+          },
+        ]
+      };
+      this.chart.setOption(this.option);
     }
   }
 }

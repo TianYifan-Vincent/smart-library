@@ -16,7 +16,7 @@
                             </span>
             </div>
             <div class="info-name">{{ name }}</div>
-            <div class="info-desc">不可能！我的代码怎么可能会有bug！</div>
+            <div class="info-desc">{{form.introduce}}</div>
           </div>
         </el-card>
       </el-col>
@@ -27,13 +27,13 @@
               <span>账户编辑</span>
             </div>
           </template>
-          <el-form label-width="90px">
+          <el-form label-width="90px" :rules="rules" ref="register" :model="form">
             <el-form-item label="用户名："> {{ name }}</el-form-item>
-            <el-form-item label="旧密码：">
-              <el-input type="password" v-model="form.old"></el-input>
+            <el-form-item label="旧密码：" prop="oldPwd">
+              <el-input type="password" v-model="form.oldPwd"></el-input>
             </el-form-item>
-            <el-form-item label="新密码：">
-              <el-input type="password" v-model="form.new"></el-input>
+            <el-form-item label="新密码：" prop="newPwd">
+              <el-input type="password" v-model="form.newPwd"></el-input>
             </el-form-item>
             <el-form-item label="性别：">
               <el-radio-group v-model="form.gender" class="ml-4">
@@ -48,7 +48,7 @@
               <el-input  v-model="form.email"></el-input>
             </el-form-item>
             <el-form-item label="个人简介：">
-              <el-input v-model="form.desc"></el-input>
+              <el-input v-model="form.introduce"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -78,6 +78,8 @@ import {reactive, ref} from "vue";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 import avatar from "../assets/img/admin.png";
+import request from "../utils/request";
+import {ElMessage} from "element-plus";
 
 export default {
   name: "user",
@@ -87,14 +89,67 @@ export default {
   setup() {
     const name = localStorage.getItem("ms_username");
     const form = reactive({
-      old: "",
-      new: "",
+      oldPwd: "",
+      newPwd: "",
       gender:"",
       age:null,
       email:"",
-      desc: "不可能！我的代码怎么可能会有bug！",
+      profile: "",//不可能！我的代码怎么可能会有bug！
+      introduce:"",
+      img:""
     });
+    const rules = {
+      oldPwd: [
+        {
+          required: true,
+          message: "请输入旧密码",
+          trigger: "blur",
+        },
+      ],
+      newPwd: [
+        { required: true, message: "请输入新密码", trigger: "blur" },
+      ],
+    };
+    const userid = localStorage.getItem("ms_userid");//管理员id
+    const getData = () => {
+      request.get(`/admin/info/${userid}`).then(res => {
+        if (res.code===455 ) {
+          form.gender=res.data.userInfo.gender
+          form.age=res.data.userInfo.age
+          form.email=res.data.userInfo.email
+          form.profile=res.data.userInfo.profile
+          form.introduce=res.data.userInfo.introduce
+          form.id=parseInt(userid)
+          // avatarImg.value=res.data.img
+        }
+      })
+    };
+    getData();
+    const register = ref(null);
     const onSubmit = () => {
+      if (form.oldPwd!=""&&form.newPwd!=""){
+      register.value.validate((valid) => {
+        if (valid) {
+          request.put("/admin/info", form).then(res => {
+            if (res.code === 457) {
+              ElMessage.success(`保存成功`);
+              getData()
+            } else {
+              ElMessage.error(res.msg);
+            }
+          })
+        }
+      })
+      }else{
+        request.put("/admin/info", form).then(res => {
+          if (res.code === 457) {
+            ElMessage.success(`保存成功`);
+            getData()
+          } else {
+            ElMessage.error(res.msg);
+          }
+        })
+      }
     };
 
     const avatarImg = ref(avatar);
@@ -134,6 +189,8 @@ export default {
     return {
       name,
       form,
+      register,
+      rules,
       onSubmit,
       cropper,
       avatarImg,
@@ -214,4 +271,5 @@ export default {
   opacity: 0;
   cursor: pointer;
 }
+
 </style>

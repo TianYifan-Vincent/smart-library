@@ -14,19 +14,26 @@
         </div>
         <el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header"
                   @selection-change="handleSelectionChange">
-          <el-table-column type="selection" width="55" align="center"/>
+          <el-table-column type="selection" width="55" align="center" :selectable="selectable"/>
           <el-table-column prop="id" label="借阅ID" sortable fixed></el-table-column>
           <el-table-column prop="title" label="书名"></el-table-column>
           <el-table-column prop="loginName" label="用户名"></el-table-column>
           <el-table-column prop="publisher" label="出版社"></el-table-column>
-          <el-table-column prop="borrow_time" label="借阅时间" sortable></el-table-column>
-          <el-table-column prop="return_time" label="归还时间" sortable></el-table-column>
-          <el-table-column prop="status" label="归还状态"></el-table-column>
+          <el-table-column prop="borrowTime" label="借阅时间" sortable></el-table-column>
+          <el-table-column prop="returnTime" label="归还时间" sortable></el-table-column>
+          <el-table-column prop="status" label="归还状态">
+            <template #default="scope">
+              <span v-if="scope.row.status===1" style="color: #f56c6c">未归还</span>
+              <span v-else-if="scope.row.status===2" style="color: #00a854">已归还</span>
+              <span v-else style="color:#ffc300;">逾期未还</span>
+            </template>
+            </el-table-column>
           <el-table-column label="操作" width="180" align="center" fixed="right">
             <template #default="scope">
-              <el-button type="text" icon="el-icon-delete" class="red"
+              <el-button v-if="scope.row.status===2" type="text" icon="el-icon-delete" class="red"
                          @click="handleDelete(scope.$index, scope.row)">删除
               </el-button>
+              <el-button v-else type="text">不可删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -43,12 +50,13 @@
 import {inject, ref, reactive} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import {fetchData} from "../api/index";
+import request from "../utils/request";
 
 export default {
   name: "tabs",
   setup() {
     const query = reactive({
-      name: "",//搜索
+      name: null,//搜索
       pageIndex: 1,//当前页号
       pageSize: 10,//每页数量
     });
@@ -56,12 +64,14 @@ export default {
     const pageTotal = ref(0);
     // 获取表格数据
     const getData = () => {
-      tableData.value = [{id: 1, title:"三体1",loginName: "刘毛毛"}, {id: 2, title:"三体2", loginName: "刘毛毛2"},{id: 3,  title:"三体3",loginName: "刘毛毛3"}]
-      pageTotal.value = 1
-      // fetchData(query).then((res) => {
-      //     tableData.value = res.list;
-      //     pageTotal.value = res.pageTotal || 50;
-      // });
+      if (query.name==='')
+        query.name=null
+      request.get(`/admin/borrowReturn/${query.pageIndex}/${query.pageSize}/${query.name}`).then(res => {
+        if (res.code===455 ) {
+          tableData.value = res.data.list;
+          pageTotal.value = res.data.total;
+        }
+      })
     };
     getData();
 
@@ -87,8 +97,15 @@ export default {
         type: "warning",
       })
           .then(() => {
-            ElMessage.success("删除成功");
-            tableData.value.splice(index, 1);
+            request.delete(`/admin/borrowReturn/delete/${tableData.value[index].id}`).then(res => {
+              if (res.code===334 ) {
+                ElMessage.success("删除成功");
+                getData()
+                // tableData.value.splice(index, 1);
+              }else{
+                ElMessage.error(res.msg)
+              }
+            })
           })
           .catch(() => {
           });
@@ -100,8 +117,8 @@ export default {
       title: "",
       loginName: "",
       publisher: "",
-      borrow_time: "",
-      return_time: "",
+      borrowTime: "",
+      returnTime: "",
       status:""
     });
     let idx = -1;
@@ -120,7 +137,16 @@ export default {
         tableData.value[idx][item] = form[item];
       });
     };
-
+    const selectable=(row, index)=>
+    {
+      // status是2才能被选中
+      if(row.status ===2){
+        return true;
+      }
+      // 函数必须有返回值且是布尔值
+      // 页面刷新后该函数会执行 N 次进行判断(N 为表格行数)
+      // 如果没有返回值则默认返回false(全部无法选中)
+    };
     return {
       query,
       tableData,
@@ -134,18 +160,25 @@ export default {
       handleDelete,
       handleEdit,
       saveEdit,
+      selectable
     };
   },
   data() {
     return {
       multipleSelection: [],//多行选中的数据
       multipleIndex:null,//选中行的index
+      multipleList:{},//选中行的id的数组
     }
   },
   methods: {
     handleSelectionChange(val) {
       this.multipleSelection = val;
       this.multipleIndex=val.map(row => this.tableData.indexOf(row));//获取多选中行的index
+      let indexList=[];
+      for (let i of this.multipleSelection){
+        indexList.push(i.id)
+      }
+      this.multipleList.ids=indexList;
     },
     handleDelete2(){
       if(this.multipleSelection.length===0){
@@ -156,12 +189,17 @@ export default {
           type: "warning",
         })
             .then(() => {
-              ElMessage.success("删除成功");
-              // console.log(this.multipleSelection)
-              for (let i = this.multipleSelection.length - 1; i >= 0; i--) {
-                this.tableData.splice(this.multipleIndex[i], 1)
-              }
-              // tableData.value.splice(index, 1);
+              console.log(this.multipleList)
+              request.post("/admin/borrowReturn/delete",this.multipleList).then(res => {
+                if (res.code===334 ) {
+                  ElMessage.success("删除成功");
+                  for (let i = this.multipleSelection.length - 1; i >= 0; i--) {
+                    this.tableData.splice(this.multipleIndex[i], 1)
+                  }
+                }else{
+                  ElMessage.error(res.msg)
+                }
+              })
             })
             .catch(() => {
             })

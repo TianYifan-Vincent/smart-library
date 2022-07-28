@@ -87,6 +87,8 @@ export default {
     const pageTotal = ref(0);
     // 获取表格数据
     const getData = () => {
+      if (query.name==='')
+        query.name=null
       request.get(`/admin/bookCategory/${query.pageIndex}/${query.pageSize}/${query.name}`).then(res => {
         if (res.code===455 ) {
           tableData.value = res.data.list;

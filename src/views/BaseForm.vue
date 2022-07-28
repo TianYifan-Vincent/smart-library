@@ -43,7 +43,7 @@
                 trigger="hover"
             >
               <template #reference>
-                <el-avatar shape="square" :src="scope.row.coverImg" />
+                <el-avatar fit="fill" shape="square" :src="scope.row.coverImg" />
               </template>
               <template #default>
                 <div
@@ -51,6 +51,7 @@
                     style="display: flex; gap: 16px; flex-direction: column"
                 >
                   <el-avatar
+                      fit="fill"
                       :size="120"
                       shape="square" :src="scope.row.coverImg"
                       style="margin-bottom: 8px"
@@ -72,7 +73,7 @@
           <el-table-column prop="bookCopyNumber" label="复本数" width="100" sortable></el-table-column>
           <el-table-column prop="publisher" label="出版社"></el-table-column>
           <el-table-column prop="publishDate" label="出版日期" width="120"></el-table-column>
-          <el-table-column prop="createdTime" label="入库时间" sortable width="120" :formatter="dateFormat"></el-table-column>
+          <el-table-column prop="createdTime" label="入库时间" sortable width="160" :formatter="dateFormat"></el-table-column>
           <el-table-column label="操作" width="180" align="center" fixed="right">
             <template #default="scope">
               <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑
@@ -126,6 +127,9 @@
           </el-form-item>
           <el-form-item label="出版日期">
             <el-input v-model="form.publishDate"></el-input>
+          </el-form-item>
+          <el-form-item label="描述" prop="description">
+            <el-input v-model="form.description"></el-input>
           </el-form-item>
         </el-form>
         <template #footer>
@@ -209,6 +213,8 @@ export default {
     const getData = () => {
       if(query.category==="全部")
         query.category=null
+      if (query.keyword==='')
+        query.keyword=null
       request.get(`/admin/books/${query.pageIndex}/${query.pageSize}/${query.keyword}/${query.category}`).then(res => {
         if (res.code===455 ) {
           tableData.value = res.data.pageInfo.list;
@@ -464,5 +470,11 @@ export default {
   margin: auto;
   width: 40px;
   height: 40px;
+}
+/deep/ .el-avatar>img {
+  width: 100%;
+  display: block;
+  height: 100%;
+  vertical-align: middle;
 }
 </style>

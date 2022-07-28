@@ -3,48 +3,80 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-pie-chart"></i> schart图表
+                    <i class="el-icon-pie-chart"></i> 统计图表
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="container">
-            <div class="plugins-tips">
-                vue-schart：vue.js封装sChart.js的图表组件。
-                访问地址：
-                <a href="https://github.com/lin-xin/vue-schart" target="_blank">vue-schart</a>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">柱状图</div>
-                <schart class="schart" canvasId="bar" :options="options1"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">折线图</div>
-                <schart class="schart" canvasId="line" :options="options2"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">饼状图</div>
-                <schart class="schart" canvasId="pie" :options="options3"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">环形图</div>
-                <schart class="schart" canvasId="ring" :options="options4"></schart>
-            </div>
+          <el-row :gutter="20">
+            <!--        <el-col :xs="24" :sm="24" :lg="8">-->
+            <!--          <div class="chart-wrapper">-->
+            <!--            <raddar-chart />-->
+            <!--          </div>-->
+            <!--        </el-col>-->
+            <el-col :xs="24" :sm="24" :lg="12">
+              <div class="chart-wrapper">
+                <raddar-chart/>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="24" :lg="12">
+              <div class="chart-wrapper">
+                <line-chart/>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20">
+            <el-col :xs="24" :sm="24" :lg="12">
+              <div class="chart-wrapper">
+                <pie-chart/>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="24" :lg="12">
+              <div class="chart-wrapper">
+                <bar-chart/>
+              </div>
+            </el-col>
+          </el-row>
+<!--            <div class="schart-box">-->
+<!--                <div class="content-title">柱状图</div>-->
+<!--                <schart class="schart" canvasId="bar" :options="options1"></schart>-->
+<!--            </div>-->
+<!--            <div class="schart-box">-->
+<!--                <div class="content-title">折线图</div>-->
+<!--                <schart class="schart" canvasId="line" :options="options2"></schart>-->
+<!--            </div>-->
+<!--            <div class="schart-box">-->
+<!--                <div class="content-title">饼状图</div>-->
+<!--                <schart class="schart" canvasId="pie" :options="options3"></schart>-->
+<!--            </div>-->
+<!--            <div class="schart-box">-->
+<!--                <div class="content-title">环形图</div>-->
+<!--                <schart class="schart" canvasId="ring" :options="options4"></schart>-->
+<!--            </div>-->
         </div>
     </div>
 </template>
 
 <script>
 import Schart from "vue-schart";
+import PieChart from "./chart/PieChart.vue";
+import BarChart from "./chart/BarChart.vue";
+import RaddarChart from "./chart/RaddarChart.vue";
+import LineChart from "./chart/LineChart.vue";
 export default {
     name: "basecharts",
     components: {
         Schart,
+        PieChart,
+        BarChart,
+        RaddarChart,
+        LineChart
     },
     setup() {
         const options1 = {
             type: "bar",
             title: {
-                text: "最近一周各品类销售图",
+                text: "最近一周图书借阅情况",
             },
             bgColor: "#fbfbfb",
             labels: ["周一", "周二", "周三", "周四", "周五"],
@@ -67,7 +99,7 @@ export default {
         const options2 = {
             type: "line",
             title: {
-                text: "最近几个月各品类销售趋势图",
+                text: "最近几个月各类书籍借阅趋势图",
             },
             bgColor: "#fbfbfb",
             labels: ["6月", "7月", "8月", "9月", "10月"],
@@ -89,7 +121,7 @@ export default {
         const options3 = {
             type: "pie",
             title: {
-                text: "服装品类销售饼状图",
+                text: "所藏各类书籍饼状图",
             },
             legend: {
                 position: "left",
@@ -154,5 +186,10 @@ export default {
     margin: 10px 0;
     font-size: 22px;
     color: #1f2f3d;
+}
+.chart-wrapper {
+  background: #fff;
+  padding: 16px 16px 0;
+  margin-bottom: 32px;
 }
 </style>

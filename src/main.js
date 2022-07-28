@@ -8,9 +8,8 @@ import axios from "axios";
 import moment from 'moment'
 
 const app = createApp(App)
-axios.defaults.baseURL='http://localhost:9090'
 app.config.globalProperties.$http=axios
-
+axios.defaults.baseURL='http://localhost:9090'
 
 installElementPlus(app)
 app

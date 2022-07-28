@@ -1,4 +1,6 @@
 import axios from 'axios'
+import store from "../store";
+import router from "../router";
 
 const request = axios.create({
     timeout: 12000   //请求超时时间
@@ -9,8 +11,8 @@ const request = axios.create({
 // 比如统一加token，对请求参数统一加密
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
-
-    // config.headers['token'] = user.token;  // 设置请求头
+    config.headers['token'] = store.state.token
+    // config.headers['token'] = token;  // 设置请求头
     return config
 }, error => {
     return Promise.reject(error)
@@ -32,6 +34,15 @@ request.interceptors.response.use(
         return res;
     },
     error => {
+        // console.log(error)
+        // switch (error.response.status) {
+        //     case 401:
+        //         this.$store.commit('del_token');
+        //         router.push({
+        //             path: '/login',
+        //             query: {redirect: router.currentRoute.value.fullPath}//登录成功后跳入浏览的当前页面,vue3需要加.value
+        //         })
+        // }
         console.log('err' + error) // for debug
         return Promise.reject(error)
     }

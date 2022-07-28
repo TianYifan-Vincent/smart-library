@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login" v-if="is_login">
-            <div class="ms-title">智慧图书馆后台管理系统</div>
+            <div class="ms-title">智慧图书管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="loginName">
                     <el-input v-model="param.loginName" placeholder="用户名">
@@ -283,14 +283,18 @@ export default {
                     if (res.code === 201||res.code===202) {
                       ElMessage.success("登录成功");
                       localStorage.setItem("ms_username", param.loginName);
+                      localStorage.setItem("token", res.data.token);
                       localStorage.setItem("ms_userid", res.data.user.id);
-                      localStorage.setItem("role", res.msg);
+                      store.commit('getuserInfo',res.data.user);
+                      store.commit('setToken',res.data.token);
                       localStorage.setItem("currentTime",getlastlogintime());
                       if (res.msg === "管理员成功"){
+                        localStorage.setItem("role", 'admin');//1表示管理员
                         router.push("/")  //登陆成功后进行页面跳转，跳转到客户页面
                       }
                       else{
-                        router.push("/404")  //登陆成功后进行页面跳转，跳转到维修员页面
+                        localStorage.setItem("role", 'user');//0表示读者
+                        router.push("/readerpage")  //登陆成功后进行页面跳转，跳转到维修员页面
                       }
                     } else {
                       ElMessage.error(res.msg);
