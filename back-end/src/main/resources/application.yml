@@ -1,0 +1,61 @@
+server:
+  port: 9090
+
+#?????
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://8.130.107.183:3306/library_mgsys?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true
+    username: root
+    password: shu2022
+    hikari:
+      max-lifetime: 30000
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    view:
+      static-path-pattern: /**
+
+  mail:
+    protocol: smtp   #邮件协议
+    port: 25
+    host: smtp.163.com               #网易邮箱 smtp 服务器地址
+    username: reinhardmaolin@163.com # 发件人邮箱
+    password: OMMBBRNQGDAROJPW             # 授权码
+    default-encoding: UTF-8
+#    properties:
+#      mail:
+#        debug: true   # 调试时这里可以用true，可以看到发送邮箱的整个流程调试信息
+#        smtp:
+#          ssl:
+#            trust: smtp.163.com
+#          auth: true
+#          starttls:
+#            enable: true    ## 这里用true
+#            required: true  ## 这里用true
+
+
+
+
+
+#mybatis??
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.lib.entity
+
+#redis
+spring.redis:
+  host: 8.130.107.183
+  port: 6379
+  password: lm310013
+  database: 0
+  timeout: 1800000
+  lettuce:
+    pool:
+      max-active=20: 20    #连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1  #最大阻塞等待时间(负数表示没限制)
+      max-idle: 5   #连接池中的最大空闲连接
+      min-idle: 0  #连接池中的最小空闲连接

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        Email 地址验证 <br>
+        这封信是由智慧图书馆网站发送的<br>
+        您收到这封邮件，是由于忘记了网站的账号密码，并且您选择通过邮件方式修改密码<br>
+        以下是您的邮箱验证码，该验证码在3分钟内有效，请您尽快使用修改密码。<br>
+        ---------------------------------------------------<br>
+        您的验证码为：
+        <div th:text="${confirmCode}" style="font-weight: bolder; color: red;"></div>
+        ---------------------------------------------------<br>
+    </div>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="58faeaac-a509-4090-b0ad-dd1e70aa3c1d" name="Changes" comment="Final Version" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Mybatis-Mapper" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/service/Impl/AdminUserServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/service/AdminUserService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/service/Impl/AdminReaderServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/service/AdminReaderService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/entity/bookCategory.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/mapper/BookMapper.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/mapper/ReaderMapper.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/mapper/bookCategoryMapper.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/entity/Reader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/controller/admin/AdminReaderController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/Interceptor/AdminLoginInterceptor.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/common/ResultEnum.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/mapper/ReaderMapper.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/service/Impl/BookServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/mapper/BookMapper.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/service/BookService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/lib/controller/admin/BookController.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="userSettingsFile" value="D:\Maven\apache-maven-3.8.4\conf\settings - 副本.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="openjdk-17" />
+    <option name="vmOptions" value="-DarchetypeCatalog=internal" />
+  </component>
+  <component name="ProjectId" id="2BNO7gSCZsqgU9gfXBfkjXeqHqR" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../book_mng_sys_2019-master" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\#SHUwork\夏季大作业\LibManagementSys\src\main\resources\static\image" />
+      <recent name="D:\#SHUwork\夏季大作业\LibManagementSys\src\main\java\com\lib" />
+      <recent name="D:\#SHUwork\夏季大作业\LibManagementSys\src\main\java" />
+      <recent name="D:\#SHUwork\夏季大作业\LibManagementSys\src\main\java\com\lib\config" />
+      <recent name="D:\#SHUwork\夏季大作业\LibManagementSys\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\#SHUwork\夏季大作业\LibManagementSys\src\main\resources\static\image\user" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lib.Interceptor" />
+      <recent name="com.lib.config" />
+      <recent name="com.lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LibraryApplication">
+    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibManagementSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.redisTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibManagementSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <option name="METHOD_NAME" value="redisTest1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.redistest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibManagementSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <option name="METHOD_NAME" value="redistest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibManagementSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="LibManagementSys" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lib.LibraryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Test.test1" />
+        <item itemvalue="JUnit.Test" />
+        <item itemvalue="JUnit.Test.redisTest1" />
+        <item itemvalue="JUnit.Test.redistest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="58faeaac-a509-4090-b0ad-dd1e70aa3c1d" name="Changes" comment="" />
+      <created>1656742911025</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1656742911025</updated>
+      <workItem from="1656742912461" duration="3570000" />
+      <workItem from="1656828750808" duration="16749000" />
+      <workItem from="1656859708039" duration="3385000" />
+      <workItem from="1656899831321" duration="24127000" />
+      <workItem from="1656986941483" duration="11933000" />
+      <workItem from="1657021301814" duration="3915000" />
+      <workItem from="1657074517781" duration="5764000" />
+      <workItem from="1657174740957" duration="600000" />
+      <workItem from="1657264823406" duration="1799000" />
+      <workItem from="1657429339338" duration="2736000" />
+      <workItem from="1657433396034" duration="7425000" />
+      <workItem from="1657460762852" duration="683000" />
+      <workItem from="1657461459006" duration="233000" />
+      <workItem from="1657694768583" duration="3934000" />
+      <workItem from="1657776877794" duration="10346000" />
+      <workItem from="1657848592433" duration="21696000" />
+      <workItem from="1657936609886" duration="15973000" />
+      <workItem from="1657960448703" duration="16231000" />
+      <workItem from="1658025834173" duration="12789000" />
+      <workItem from="1658110055090" duration="28711000" />
+      <workItem from="1658196001736" duration="30419000" />
+      <workItem from="1658247150955" duration="2182000" />
+      <workItem from="1658249776829" duration="445000" />
+      <workItem from="1658250768716" duration="187000" />
+      <workItem from="1658292799026" duration="11127000" />
+      <workItem from="1658305403451" duration="1820000" />
+      <workItem from="1658308068861" duration="171000" />
+      <workItem from="1658322611660" duration="1206000" />
+      <workItem from="1658324630998" duration="3918000" />
+      <workItem from="1658332202887" duration="415000" />
+      <workItem from="1658332769261" duration="2882000" />
+      <workItem from="1658384941125" duration="36127000" />
+      <workItem from="1658470195012" duration="25300000" />
+      <workItem from="1658554925557" duration="18451000" />
+      <workItem from="1658641533200" duration="20592000" />
+      <workItem from="1658677734115" duration="11000" />
+      <workItem from="1658713998370" duration="59000" />
+      <workItem from="1658714213273" duration="777000" />
+      <workItem from="1658719169770" duration="679000" />
+      <workItem from="1658731039870" duration="6638000" />
+      <workItem from="1658800468100" duration="1788000" />
+      <workItem from="1658927260684" duration="241000" />
+      <workItem from="1658927526626" duration="100000" />
+      <workItem from="1658929173852" duration="8735000" />
+      <workItem from="1658988870167" duration="181000" />
+    </task>
+    <task id="LOCAL-00001" summary="Environment initialize!!">
+      <created>1656743457284</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1656743457284</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Environment initialize!!">
+      <created>1656899975754</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1656899975754</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Login/Registry/ChangeCode">
+      <created>1656927043525</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1656927043525</updated>
+    </task>
+    <task id="LOCAL-00004" summary="NEWEST VERSION">
+      <created>1658041290484</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1658041290484</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Final Version">
+      <created>1658988993215</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1658988993215</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Final Version">
+      <created>1658989012943</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658989012943</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Environment initialize!!" />
+    <MESSAGE value="Login/Registry/ChangeCode" />
+    <MESSAGE value="UPDATE VERSION" />
+    <MESSAGE value="NEWEST VERSION" />
+    <MESSAGE value="Final Version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final Version" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lib/service/Impl/AdminBorrowReturnServiceImpl.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.lib.entity.approve" memberName="operation" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="approve.date.cdate" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LibManagementSys$LibraryApplication.ic" NAME="LibraryApplication Coverage Results" MODIFIED="1658675438160" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
